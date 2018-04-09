@@ -1,0 +1,551 @@
+// Import all partials
+@require './_*.styl'
+
+
+header.top
+  text-align center
+  // This is a bunch of goofy CSS to make the logo look decent
+  .ofThe
+    display flex
+    font-size 3rem
+    color orange
+    justify-content center;
+    align-items center;
+    background url('images/anchor.svg') center no-repeat;
+    background-size cover
+    padding 0 1rem
+    .of
+      padding-right 2rem
+      position relative
+      right -0.5rem
+  h3
+    margin 0
+    font-size 2rem
+    color orange
+    position relative
+    display inline-block
+    span
+      background white
+      position relative
+      z-index 2
+      padding-left 1rem
+      padding-right 1rem
+    &:before, &:after
+      display block
+      z-index 1
+      background black
+      position absolute
+      width 130%
+      height 1px
+      content ''
+      top 5px
+      margin-left -15%
+    &:after
+      top auto
+      bottom 7px
+
+
+.catch-of-the-day
+  display flex
+  height 90vh
+  max-width:1500px
+  margin 0 auto
+  margin-top 5vh
+  perspective: 1000;
+  transform-style preserve-3d
+  & > *
+    flex 1 4 auto
+    padding 2rem
+    border 1rem double lighten(black,10%)
+    position relative
+    background white
+    transition all 0.3s
+    box-shadow 0px 5px 5px rgba(0,0,0,0.1)
+    overflow scroll
+    &:first-child
+      flex-shrink 1 // take 4x the extra room
+      flex-basis 50%
+      transform translateX(50%) rotateY(6deg) translateX(-50%)
+    &:nth-child(2)
+      transform translateX(-50%) rotateY(-14deg) translateX(50%)
+      border-left 0
+      border-right 0
+      min-width 300px
+    &:last-child
+      flex-shrink 1 // take 4x the extra room
+      flex-basis 50%
+      transform translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px)
+
+// Folding Transforms
+// Take off folding when not checked
+input#fold:not(:checked) ~ #main
+  .catch-of-the-day > *
+      transform none
+
+label[for="fold"]
+  position absolute
+  top 1rem
+  left 1rem
+  text-transform uppercase
+  font-size 1.3rem
+  background black
+  color white
+  border 2px solid black
+  cursor pointer
+  padding 0.5rem 1rem
+
+input#fold
+  display none
+  &:checked + label
+    background white
+    color black
+
+ul
+  list-style none
+  margin 0
+  padding 0
+
+ul.order
+  // Default state
+  li
+    border-bottom 1px solid black
+    padding 2rem 0
+    display flex
+    font-size 1.4rem
+    justify-content space-between
+    align-items center
+    &:hover
+      // padding 1rem 0
+      button
+        display inline
+    button
+      border 0
+      display none
+      line-height 1
+      padding 0
+    &.total
+      font-weight 600
+      border-bottom 3px solid black
+      border-top 3px double black
+    &.unavailable
+      text-decoration line-through
+      background lighten(red, 80%)
+    .price
+      font-size 1.2rem
+    span.count
+      position relative
+      overflow hidden
+      float left // only works if it's floated?!
+      span
+        display inline-block
+        // transition all 0.5s
+
+.order-title
+  text-align center
+
+.fish-edit
+  margin-bottom 20px
+  border 2px solid black
+  overflow hidden
+  display flex
+  flex-wrap wrap
+  input, textarea, select
+    width 33.33%
+    padding 10px
+    line-height 1
+    font-size 1.2rem
+    border 0
+    border-bottom 1px solid black
+    border-right 1px solid black
+    appearance none
+    border-radius 0
+    background white
+    &:focus
+      outline 0
+      background lighten(orange, 85%)
+  textarea
+    width 100%
+  input:last-of-type
+    width 100%
+  button
+    width 100%
+    border 0
+
+
+// Menu Styles
+.list-of-fish
+  border-top 2px solid black
+  border-bottom 1px solid black
+  padding-top 5px
+  margin-top 2rem
+  transform translateZ(0);
+
+.menu-fish
+  border-bottom 2px solid black
+  border-top 1px solid black
+  padding-bottom 2rem
+  padding-top 2rem
+  margin-bottom 5px
+  clear both
+  overflow hidden
+  p
+    margin 0
+    font-size 1.8rem
+  .fish-name
+    margin 0
+    display flex
+    justify-content space-between
+    align-items center
+  .price
+    font-size 1.4rem
+    // color orange
+    justify-content flex-end
+    // font-family 'Open Sans Condensed'
+  img
+    float left
+    width 150px
+    margin-right 1rem
+
+button, input[type=submit]
+  text-transform uppercase
+  background #1c1c75;
+  border 1px solid #1c1c75;
+  color #fff
+  font-weight 600
+  font-size 1.4rem
+  font-family 'haymakerregular', sans-serif
+  -webkit-transition all 0.2s
+  transition all 0.2s
+  position relative
+  z-index 2
+  padding 10px 15px
+  margin-bottom 0
+  &[disabled]
+    color red
+    background white
+    border-color red
+    transform rotate(-10deg) scale(2) translateX(50%) translateY(-50%)
+    &:hover
+      color red
+      cursor not-allowed
+    &:after
+      display none
+  &:after
+    content ''
+    z-index -1
+    display block
+    background black
+    position absolute
+    width 100%
+    height 0%
+    left 0
+    top 0
+    transition all 0.2s
+  &:hover, &:focus
+    color white
+    outline 0
+    &:after
+      height 100%
+  // variants
+  &.warning
+    &:after
+      background red
+  &.active
+    background #25a579
+  &.success
+    &:after
+      background green
+
+  &.github, &.facebook, &.twitter
+    border 0
+    display block
+    margin-bottom 2rem
+    width 100%
+    color white
+    padding 2rem
+
+  &.github
+    background #82D465
+    &:after
+      background darken(#82D465, 20%)
+
+  &.facebook
+    background #3864A3
+    &:after
+      background darken(#3864A3, 20%)
+
+  &.twitter
+    background #5EA9DD
+    &:after
+      background darken(#5EA9DD, 20%)
+
+
+// Store Selector
+.store-selector
+  background white
+  max-width 500px
+  margin 50px auto
+  padding 2rem
+  border 2px solid black
+  input, button
+    width 100%
+    &[type="text"]
+      text-align center
+      font-size 3rem
+
+.wrapper
+  font-size 0
+  line-height 0
+
+.schedule,.lineup
+  box-sizing border-box
+  display inline-block
+  font-size 16px
+  line-height 1
+  overflow hidden
+  padding 2.5rem
+  vertical-align top
+  width 30%
+  h1,
+  .h1
+    font-size 4.4rem
+    line-height 0.7 // this font has a wacky baseline
+    display inline-block;
+    text-align center;
+  ul
+    height 92vh
+    list-style none
+    margin 0
+    margin-top 20px
+    overflow auto
+    padding 0
+    padding-bottom 8rem
+    padding-right 0
+    li
+      border-top 1px solid #000
+      padding 2rem 2rem 2rem 0rem
+      vertical-align bottom
+      position relative
+      button,
+      p
+        display block
+        margin-top 15px
+      p
+        padding 9.5px 0
+        font-size: 1.4rem;
+        font-family: 'haymakerregular', sans-serif;
+      .number
+        display inline-block
+        vertical-align middle
+        padding 45px 5px
+        background #fff
+        border-radius 0
+        height 100%
+        width 50px
+        text-align center
+        position absolute
+        font-size 25px
+        right 0
+        opacity 0.4
+        font-family 'haymakerregular', sans-serif
+        top 50%
+        transform translateY(-50%)
+      h3
+        display inline-block
+        font-size 2rem
+        margin-bottom 0
+        margin-top 0
+        vertical-align middle
+      &:last-child
+        border-bottom 0
+.lineup
+  background white
+  text-align center
+  width 70%
+  .select-wrapper
+    position relative
+    display inline-block
+    margin-left 15px
+  .h1
+    display inline-block
+    vertical-align middle
+  select
+    display inline-block
+    -webkit-appearance none
+    padding 5px 20px 5px 10px
+    border-radius 0
+    background #fff
+    font-size 16px
+    vertical-align middle
+  .save-lineup &
+    padding 0px
+  .lineup-container
+    background white
+    height 92vh
+    padding-bottom 8rem
+    overflow auto
+    .save-lineup &
+      height inherit
+      text-align center
+
+  .position-container
+    border-bottom 1px solid #000
+    display inline-block
+    min-height 200px
+    padding 3rem 0
+    text-align center
+    width 100%
+    &.active-container
+      .player:not(.active)
+        border-color #25a579
+        .switch:before
+          color #25a579
+    .save-lineup &
+      border-bottom 0
+      border-right 1px solid #000
+      min-height inherit
+      height auto
+      padding 0 5px
+      vertical-align middle
+      width auto
+      .player
+        background #000
+        display block
+        font-size 13px
+        margin 20px;
+        width 120px
+        height 120px
+        span.number
+          font-size 60px
+    &:last-child
+      border-bottom 0
+      .save-lineup &
+        border-right 0
+    .player
+      background #1c1c75
+      border 4px solid #1c1c75
+      border-radius 50%
+      color #fff
+      display inline-block
+      height 140px
+      margin 2rem
+      padding 2rem!important
+      position relative
+      text-align center
+      vertical-align middle
+      width 140px
+      span.switch
+        position absolute
+        color #1c1c75
+        cursor pointer
+        left 0
+        line-height 30px
+        bottom 0
+        opacity 1
+        transform translateY(30px)
+        transition opacity 0.15 ease, transform 0.15s ease
+        &:before
+          content "⇹"
+          color #d77777
+          font-size 22px
+        &.active
+          transform translateY(0)
+          opacity 0
+        &:focus
+          color green
+          outline none
+      &.active
+        border-color #d77777
+      &:hover
+        .exit
+          opacity 1
+      .inner-content{
+        position relative
+        top 50%
+        transform translateY(-50%)
+      }
+      span
+        display inline-block
+        font-weight bold
+        width 100%
+        &.number
+          font-size 90px
+          left 0
+          opacity 0.3
+          font-weight normal
+          position absolute
+          top 50%
+          transform translateY(-50%)
+  ul
+    padding-right 0
+    text-align center
+  li
+    &.total
+      font-weight bold
+    span
+      &:last-child
+        float right
+
+.error
+  color red
+  margin 0
+  position relative
+  font-weight bold
+.position
+  color #1c1c75
+  font-family 'blanchcaps_inline', sans-serif
+  font-size 77px
+  opacity 0.3
+  position absolute
+  right 55px
+  top 50%
+  transform translateY(-50%)
+.save
+  position absolute
+  bottom 0
+  z-index 99
+  background rgba(26, 47, 99, 1)
+  padding 15px
+  left 0
+  width 100%
+  color #fff
+  font-size 16px
+  text-align center
+  p
+    color #fff!important
+    line-height 48px
+  button
+    background white
+    margin 0
+    padding 15px 30px
+    color #1c1c75
+    border 0
+    &:hover
+      color #fff
+.exit
+  position absolute
+  top -4px
+  right 20px
+  font-weight bold
+  padding 6px 9px
+  background #d77777
+  color #fff
+  border-radius 50%
+  cursor pointer
+  opacity 0
+  transition opacity .2s ease
+  z-index 2
+.save-lineup
+  background #fff
+  position relative
+  .schedule,
+  .save
+    height 0
+    opacity 0
+    visibility hidden
+    padding 0
+  .lineup
+    width 100%
+  .position-container
+    padding 30px 0
+
